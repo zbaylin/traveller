@@ -8,5 +8,5 @@ This project is for MATH 3012 at Georgia Tech. It uses various graph theory conc
 The goal of this project is to use graph theory to "solve" the Travelling Salesman Problem.
 
 ## Contributors
-- Aashay Amin - [zbaylin](https://github.com/zbaylin/)
-- Zach Baylin - [ahamin3167](https://github.com/ahamin3167)
+- Zach Baylin - [zbaylin](https://github.com/zbaylin/)
+- Aashay Amin - [ahamin3167](https://github.com/ahamin3167)
