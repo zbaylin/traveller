@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Optional Final Project: Initial Progress Report}
+\author{Aashay Amin and Zach Baylin}
+\date{Monday, March 18, 2019}
+
+\begin{document}
+  \maketitle
+  \section{Travelling Salesman Problem}
+    The Travelling Salesman Problem (or TSP) is an ages old math problem. It originates from the need of salesman to travel to numerous locations in the most efficient way possible, starting and ending at ``home''. This has very obvious connections to graph theory. If we have a graph $G=(V,E)$ where $V$ is comprised of the various ``points of interest'' we wish to travel to, and $E$ is the set of edges such that $G$ is Hamiltonian, then there is assuredly a Hamiltonian path on $G$. This has numerous implications. Most notably, it means we have a mathematical basis for this problem, and tools in graph theory to ''solve'' it. This also means we can integrate real-world data into this problem to solve the original problem salesman used to face. To do this, we need to employ geographic data. OpenStreetMap provides this data in XML format, which is easily parsed by most modern programming languages.
+  \section{Our Project}
+    This project will explore the following ideas:
+    \begin{itemize}
+      \item (Hamiltonian) path finding algorithms
+        \begin{itemize}
+          \item i.e. Dijkstra's algorithm 
+        \end{itemize}
+      \item Solving the travelling salesman problem with varying ``weights'' to edges
+        \begin{itemize}
+          \item i.e. distance, amount of traffic, etc.
+        \end{itemize}
+      \item Integrating our research with OpenStreetMap, a publicly available geographic data API
+    \end{itemize}
+    We will use the programming language \texttt{nim} for this project, a relatively new language that is designed to have Pythonic syntax while having static typing and C-like speeds. Although we will be using \texttt{nim}, this could be implemented in any modern programming language. We will need to:
+    \begin{itemize}
+      \item Make a class/type for graphs, edges, and vertices
+      \item Implement path finding algorithm(s)
+      \item Fetch data from OpenStreetMap
+      \item Parse XML from OpenStreetMap
+      \item Adapt the parsed data from OpenStreetMap to our graph types
+        \begin{itemize}
+          \item Once this is done, we can run our pre-existing algorithm on the data
+        \end{itemize} 
+    \end{itemize}
+    Our goal for this project is to write dynamic and reusable code that can both be easily implemented in a different programming language and can process data from multiple sources.
+    
+\end{document}
