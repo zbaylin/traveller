@@ -22,6 +22,11 @@ proc solveGreedy*(graph : Graph) : seq[Vertex] =
       if v in edge.vertices:
         edges.excl(edge)
         temp.add(edge)
+    if temp.len == 0:
+      var e: ref ValueError
+      new(e)
+      e.msg = "Graph is not Hamiltonian"
+      raise e
     temp.sort do (x, y: Edge) -> int:
       result = cmp(x.weight, y.weight)
     let vs = toSeq(temp[0].vertices.items)
@@ -30,4 +35,4 @@ proc solveGreedy*(graph : Graph) : seq[Vertex] =
     else:
       v = vs[0]
     path.add(v)
-  path
+  path 
