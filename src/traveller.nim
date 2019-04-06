@@ -2,17 +2,20 @@ import docopt
 import util/parser
 import models/graph
 import solvers/greedy
+import util/config
 import sets
+import json
 
 let doc = """
 Traveller: a TSP solver.
 
 Usage:
-  traveller <input>
+  traveller <input> --type <type>
 
 Options:
   -h --help     Show this screen
   -v --version  Show the version
+  --type        Type of input (graph or georgraphy)
 """
 
 # The input is a CSV file with the format:
@@ -20,5 +23,19 @@ Options:
 # Line 2+: edges with weights
 let args = docopt(doc, version = "Traveller 1.0")
 
-var G : Graph = csvToGraph($args["<input>"])
+loadConfig()
+
+var G: Graph
+
+case ($args["<type>"])
+of "graph":
+  G = csvOfGraph($args["<input>"])
+of "geography":
+  G = csvOfGeography($args["<input>"])
+else:
+  echo "1"
+  var e: ref ValueError
+  new(e)
+  e.msg = "Invalid CSV type"
+
 echo solveGreedy(G)
