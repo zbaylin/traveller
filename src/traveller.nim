@@ -1,6 +1,7 @@
 import docopt
 import util/parser
 import models/graph
+import solvers/greedy
 import sets
 
 let doc = """
@@ -20,5 +21,4 @@ Options:
 let args = docopt(doc, version = "Traveller 1.0")
 
 var G : Graph = csvToGraph($args["<input>"])
-for edge in (G.edges):
-  echo edge
+echo solveGreedy(G)
