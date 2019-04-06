@@ -1,10 +1,13 @@
 import docopt
 import util/parser
 import models/graph
+import models/vertex
 import solvers/greedy
 import util/config
 import sets
+import tables
 import json
+import sequtils
 
 let doc = """
 Traveller: a TSP solver.
@@ -26,16 +29,25 @@ let args = docopt(doc, version = "Traveller 1.0")
 loadConfig()
 
 var G: Graph
+var backMap: Table[int, tuple[lat: string, long: string, name: string]]
 
 case ($args["<type>"])
 of "graph":
   G = csvOfGraph($args["<input>"])
+  var results = solveGreedy(G)
+  echo "Shortest path:"
+  for result in results:
+    echo "\t" & $result
 of "geography":
-  G = csvOfGeography($args["<input>"])
+  (G, backMap) = csvOfGeography($args["<input>"])
+  var results = map(solveGreedy(G), proc(x: int): string = backMap[x].name)
+  echo "Shortest path:"
+  for result in results:
+    echo "\t" & result
+
 else:
   echo "1"
   var e: ref ValueError
   new(e)
   e.msg = "Invalid CSV type"
 
-echo solveGreedy(G)

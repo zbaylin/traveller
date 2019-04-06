@@ -40,17 +40,17 @@ proc csvOfGraph*(input : string) : Graph =
   G.edges = E
   return G
 
-proc csvOfGeography*(input : string) : Graph =
+proc csvOfGeography*(input : string) : (Graph, Table[int, tuple[lat: string, long: string, name: string]]) =
   var V: VertexSet
   var E: EdgeSet
   var G: Graph
-  var backMap = initTable[int, tuple[lat: string, long: string]]()
+  var backMap = initTable[int, tuple[lat: string, long: string, name: string]]()
   let client = newHttpClient()
   V.init()
   E.init()
   let arr = toSeq(csvRows(input))
   for i in 0..(arr.len - 1):
-    backMap[i] = (lat: arr[i][0], long: arr[i][1])
+    backMap[i] = (lat: arr[i][0], long: arr[i][1], name: arr[i][2])
   let vSeq = toSeq(backMap.keys)
   V = toSet(vSeq)
   var temp: seq[tuple[a: int, b: int, w: float]]
@@ -72,4 +72,4 @@ proc csvOfGeography*(input : string) : Graph =
     E.incl(e)
   G.vertices = V
   G.edges = E
-  return G
+  return (G, backMap)
