@@ -25,7 +25,7 @@ proc solveGreedy*(graph : Graph) : seq[Vertex] =
     if temp.len == 0:
       var e: ref ValueError
       new(e)
-      e.msg = "Graph is not Hamiltonian"
+      e.msg = "Graph is not Eulerian"
       raise e
     temp.sort do (x, y: Edge) -> int:
       result = cmp(x.weight, y.weight)
