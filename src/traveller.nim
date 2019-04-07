@@ -40,11 +40,10 @@ of "graph":
     echo "\t" & $result
 of "geography":
   (G, backMap) = csvOfGeography($args["<input>"])
-  var results = map(solveGreedy(G), proc(x: int): string = backMap[x].name)
+  var results = map(solveGreedy(G), proc(x: int): tuple[lat: string, long: string, name: string] = (lat: backMap[x].lat, long: backMap[x].long, name: backMap[x].name))
   echo "Shortest path:"
   for result in results:
-    echo "\t" & result
-
+    echo "\t" & result.name & ": " & result.lat & "," & result.long
 else:
   echo "1"
   var e: ref ValueError
